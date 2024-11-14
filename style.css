@@ -13,6 +13,7 @@ body{
     display: flex;
     align-items: flex-start;
     margin-top: 50px;
+    margin-left: 90px;
 }
 .header{
     color: rgb(75, 15, 15);
@@ -39,6 +40,7 @@ body{
     padding-left: 20px;
     padding-right: 20px;
     margin-left: 55px;
+    margin-bottom: 100px;
     
 }
 .card{
@@ -83,7 +85,7 @@ img{
     font-size: 15px;
 }
 .price{
-    color: rgb(179, 75, 37)
+    color: rgb(179, 75, 37);
 }
 .btn{
     position: absolute;
@@ -125,7 +127,7 @@ img{
     display: flex;
     flex-direction: column;
     height: 100%;
-    border: 1px solid red;
+    border: 1px solid rgb(75, 15, 15);
     background-color: white;
     margin-left: 70px;
     padding: 20px 20px;
@@ -134,11 +136,15 @@ img{
 
 .list-items{
     font-size: 15px;
-    color: green;
+    color: rgb(179, 75, 37);
     width: 230px;
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid grey;
     padding: 3px;
     margin-left: 20px;
+}
+.list-items:hover{
+    cursor: pointer;
+    border-bottom: 1px solid rgb(179, 75, 37);
 }
 .empty-cart{
     margin-top: 40px;
@@ -154,6 +160,7 @@ img{
     margin-top: 15px;
 }
 .total{
-    margin-top: 10px;
+    margin-top: 50px;
     margin-left: 20px;
+    font-weight: 800;
 }
