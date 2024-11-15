@@ -1,83 +1,105 @@
 let totalPrice = 0;
 let cartItemCount = 0;
+let cartItems = [];
 
-//reference the empty cart image logo
+// Reference elements for cart display and cart controls
 const cartImage = document.querySelector('.empty-cart');
 const cartInfo = document.querySelector('.cart-info');
 const cartHeader = document.querySelector('.cart-header');
+const startNewOrder = document.querySelector('.start-new-order');
 
-// Initially, show the empty cart image if there are no items
+// Show the empty cart image and info by default
 cartImage.style.display = 'block';
+cartInfo.style.display = 'block';
 
-//Initially show the cart info
-cartInfo.style.display='block';
-
-const addToCart = document.querySelectorAll('.btn').forEach((button)=>{
-    button.addEventListener('click', function (){
-        const productCard = this.closest('.card') // allows one to get the parent container of the products so that one will be able to dynamically manipulate the siblings (being the product items details)
+// Attach click event to all 'Add to Cart' buttons
+document.querySelectorAll('.btn').forEach((button) => {
+    button.addEventListener('click', function () {
+        const productCard = this.closest('.card');
         const productName = productCard.querySelector('.name').textContent;
         const productDescription = productCard.querySelector('.description').textContent;
         const productImage = productCard.querySelector('.images').src;
         const productPrice = productCard.querySelector('.price').textContent;
 
-        //Converting the price into a float for calculations
         const formattedPrice = parseFloat(productPrice.replace(/[^0-9.-]+/g, ""));
+        cartItems.push({ name: productName, price: formattedPrice, description: productDescription });
 
-        //Here, since i have access to the parent container of the product items i will then be using it to acess the siblings one by one, i am adding textContent so that i will be able to retrieve the value that is attached to the element on the html side.
-        console.log("Items Added:", productName, productDescription, productImage, productPrice);
+        console.log("Item Added:", productName, productDescription, productImage, formattedPrice);
 
-        //Call the function to update the cart items with the product details selected by the user
         updateCartItem(productName, formattedPrice, productImage, productDescription);
-
         
-        //Here i am incrementing the cart item count after the cart is being updated by what the user clicks
-        cartItemCount+=1;
+        cartItemCount += 1;
         showCartCount();
-
-        //call the total price display function here
+        
         totalPrice += formattedPrice;
         totalPriceDisplay();
 
-        // Hide the empty cart image when an item is added
         if (cartItemCount === 1) {
             cartImage.style.display = 'none';
-        }
-
-        //Hide cartInfo when items are added
-        if (cartItemCount ===1){
-            cartInfo.style.display= 'none';
+            cartInfo.style.display = 'none';
         }
     });
 });
-//Next, i will create a list item that will dynamically display the details of the products in the cart section, this is created using a function
 
 function updateCartItem(productName, productPrice, productImage, productDescription) {
     const cartContent = document.createElement('li');
-    cartContent.className ='list-items';
+    cartContent.className = 'list-items';
     cartContent.innerHTML = `<span>${productDescription} - ₦${productPrice.toFixed(2)}</span>`;
     
-    // Append the list items to the cart item container
     const cartContainer = document.querySelector('.cart-holder');
     cartContainer.appendChild(cartContent);
 }
 
-//create a function to calculate the total price
-
-function totalPriceDisplay(){
+function totalPriceDisplay() {
     const total = document.querySelector('.total');
-    total.textContent = 'Order Total:  ₦' + totalPrice.toFixed(2);
+    total.innerHTML = "Order Total: ₦" + totalPrice.toFixed(2) + 
+                      "<button class='neutral-btn'><img class='carbon-neutral' src='./assets/icon-carbon-neutral.svg' alt=''/> This is a <b>carbon-neutral</b> delivery </button>" +
+                      "<button class='confirm-order-btn'>Confirm Order</button>";
+    attachConfirmOrderListener();
 }
 
-//a function to clear the empty cart image when the user starts to add items to the cart
-function clearCartImage(){
-        cartItemCount--;
-    if (cartItemCount === 1){
-        cartImage.style.display ="block";
+function attachConfirmOrderListener() {
+    const confirmOrderBtn = document.querySelector('.confirm-order-btn');
+    if (confirmOrderBtn) {
+        confirmOrderBtn.addEventListener('click', () => confirmOrderModal());
     }
 }
 
-function showCartCount(){
-    cartHeader.textContent = ` Your cart (${cartItemCount})`;
+function clearCartImage() {
+    if (cartItemCount === 0) {
+        cartImage.style.display = 'block';
+        cartInfo.style.display = 'block';
+    }
 }
 
+function showCartCount() {
+    cartHeader.textContent = `Your cart (${cartItemCount})`;
+}
 
+function confirmOrderModal() {
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+    modal.innerHTML = `
+        <div class='modal-content'>
+            <button class='close-modal-btn'>x</button>
+            <img class='confirmed-logo' src='./assets/icon-order-confirmed.svg' alt='confirmed-logo'/>
+            <h2>Order Confirmed</h2>
+            <p>We hope you enjoy your food!</p>
+            <ul class="order-summary"></ul>
+            <button class='start-order-btn'>Start New Order</button>
+        </div>`;
+    document.body.appendChild(modal);
+
+    const orderSummaryList = modal.querySelector('.order-summary');
+    cartItems.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.description} - ₦${item.price.toFixed(2)}`;
+        orderSummaryList.appendChild(listItem);
+    });
+
+    document.querySelector('.close-modal-btn').addEventListener('click', () => modal.remove());
+
+    document.querySelector('.start-order-btn').addEventListener('click', () => {
+        location.reload();
+    });
+}
