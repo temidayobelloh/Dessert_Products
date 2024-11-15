@@ -24,8 +24,6 @@ document.querySelectorAll('.btn').forEach((button) => {
         const formattedPrice = parseFloat(productPrice.replace(/[^0-9.-]+/g, ""));
         cartItems.push({ name: productName, price: formattedPrice, description: productDescription });
 
-        console.log("Item Added:", productName, productDescription, productImage, formattedPrice);
-
         updateCartItem(productName, formattedPrice, productImage, productDescription);
         
         cartItemCount += 1;
@@ -44,18 +42,47 @@ document.querySelectorAll('.btn').forEach((button) => {
 function updateCartItem(productName, productPrice, productImage, productDescription) {
     const cartContent = document.createElement('li');
     cartContent.className = 'list-items';
-    cartContent.innerHTML = `<span>${productDescription} - ₦${productPrice.toFixed(2)}</span>`;
+    cartContent.innerHTML = `<span>${productDescription} - ₦${productPrice.toFixed(2)}</span> <button class="close-list">x</button>`;
     
     const cartContainer = document.querySelector('.cart-holder');
     cartContainer.appendChild(cartContent);
+
+    // Attach event listener for removing the item
+    const closeBtn = cartContent.querySelector('.close-list');
+    closeBtn.addEventListener('click', () => {
+        // Remove the item from the DOM
+        cartContent.remove();
+
+        // Update the total price and cart count
+        totalPrice -= productPrice;
+        cartItemCount -= 1;
+        showCartCount();
+
+        // Update cartItems array: Remove the first matching item
+        const index = cartItems.findIndex(item => item.name === productName && item.price === productPrice);
+        if (index !== -1) cartItems.splice(index, 1);
+
+        // Update the total price display and check for empty cart
+        totalPriceDisplay();
+        
+        // Show the empty cart image and info if cart is empty
+        if (cartItemCount === 0) {
+            clearCartImage();
+        }
+    });
 }
 
 function totalPriceDisplay() {
     const total = document.querySelector('.total');
-    total.innerHTML = "Order Total: ₦" + totalPrice.toFixed(2) + 
-                      "<button class='neutral-btn'><img class='carbon-neutral' src='./assets/icon-carbon-neutral.svg' alt=''/> This is a <b>carbon-neutral</b> delivery </button>" +
-                      "<button class='confirm-order-btn'>Confirm Order</button>";
-    attachConfirmOrderListener();
+    if (cartItemCount > 0) {
+        total.innerHTML = "Order Total: ₦" + totalPrice.toFixed(2) + 
+                          "<button class='neutral-btn'><img class='carbon-neutral' src='./assets/icon-carbon-neutral.svg' alt=''/> This is a <b>carbon-neutral</b> delivery </button>" +
+                          "<button class='confirm-order-btn'>Confirm Order</button>";
+        attachConfirmOrderListener();
+    } else {
+        // Clear the total display when cart is empty
+        total.innerHTML = "";
+    }
 }
 
 function attachConfirmOrderListener() {
