@@ -17,7 +17,7 @@ body{
 }
 .header{
     color: rgb(75, 15, 15);
-    margin-left: 110px;
+    margin-left: 70px;
     width: 290px;
     height: 72px;
     margin-bottom: 40px;
@@ -39,7 +39,7 @@ body{
     padding-bottom: 150px;
     padding-left: 20px;
     padding-right: 20px;
-    margin-left: 55px;
+    margin-left: 10px;
     margin-bottom: 100px;
     
 }
@@ -130,7 +130,7 @@ img{
     flex-direction: column;
     height: 100%;
     background-color: white;
-    margin-left: 70px;
+    margin-left: 45px;
     padding: 20px 20px;
     border-radius: 20px;
 }
@@ -233,7 +233,7 @@ img{
     margin: 10% auto;
     padding: 20px;
     width: 30%;
-    height: 60%;
+    height: 70%;
     max-width: 500%;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -312,4 +312,7 @@ img{
     font-weight: 900;
     color: black;
     margin-left: 20px;
+}
+.quantity-container{
+    display: none;
 }
