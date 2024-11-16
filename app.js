@@ -113,6 +113,7 @@ function confirmOrderModal() {
             <h2>Order Confirmed</h2>
             <p>We hope you enjoy your food!</p>
             <ul class="order-summary"></ul>
+            <h3 class="total-order-price"></h3>
             <button class='start-order-btn'>Start New Order</button>
         </div>`;
     document.body.appendChild(modal);
@@ -120,9 +121,13 @@ function confirmOrderModal() {
     const orderSummaryList = modal.querySelector('.order-summary');
     cartItems.forEach(item => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${item.description} - ₦${item.price.toFixed(2)}`;
+        listItem.classList.add('order-item');
+        listItem.innerHTML = `${item.description} - ₦${item.price.toFixed(2)}`;
         orderSummaryList.appendChild(listItem);
     });
+    //Add the total order price to the order summary
+    const totalOrderPrice = modal.querySelector('.total-order-price');
+    totalOrderPrice.textContent =  `Total Order Price: ₦${totalPrice.toFixed(2)}`; // Display total price here
 
     document.querySelector('.close-modal-btn').addEventListener('click', () => modal.remove());
 
