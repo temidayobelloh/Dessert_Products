@@ -250,7 +250,7 @@ img{
     margin-left: 20px;
     margin-bottom: 20px;
 }
-/* Close button styling */
+
 .close-modal-btn {
     position: absolute;
     top: 10px;
@@ -267,7 +267,6 @@ img{
     border: none;
 }
 
-/* Change color on hover */
 .close-modal-btn:hover,
 .close-modal-btn:focus {
     color: #000;
@@ -315,4 +314,206 @@ img{
 }
 .quantity-selector{
     display: none;
+}
+
+
+@media screen and (max-width: 768px){
+    .main-container{
+    margin-left: 20px;
+
+    }
+    .card{
+        width: 90%;
+    }
+    .cart-items{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .modal-content{
+        text-align: left;
+        position: relative;
+        background-color: #fff;
+        margin: 20% auto;
+        padding: 20px;
+        width: 50%;
+        height: 40%;
+        max-width: 200%;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content h2{
+        font-weight: 900;
+        text-align: left;
+        margin-left: 20px;
+    }
+    .modal-content p{
+        font-size: 15px;
+        color: #8d8b8b;
+        text-align: left;
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+    .neutral-btn{
+        margin-top: 20px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        width: 100%;
+        border-radius: 20px;
+        border: none;
+        height: 40px;
+        font-size: 13px;
+    
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        max-width: 100%;
+        max-height: auto;
+        background-color: #E8D9D6;
+        padding: 0 15px;
+    }
+
+    .main-container {
+        flex-direction: column; 
+        align-items: center;
+        margin: 20px auto;
+        gap: 20px; 
+    }
+
+    .header {
+        font-size: 20px; 
+        text-align: center; 
+        margin: 20px 0;
+        margin-bottom: 0;
+        line-height: 1.2; 
+        width: 100%; 
+        position: static; 
+    }
+
+    .cards-wrapper {
+        width: 100%;
+        padding: 15px;
+        margin: 0;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+        width: 100%;
+        height: auto; 
+        margin: 15px 0;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        gap: 10px;
+    }
+
+    .card img {
+        width: 300px;
+        height: 200px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+
+    .description, .price, .name {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .btn {
+        width: 120px;
+        height: 35px;
+        font-size: 13px;
+        margin: 15px auto; 
+        border-radius: 10px;
+        align-self: center;
+        display: block; 
+        text-align: center; 
+    }
+
+    .orders-box {
+        width: 100%;
+        margin: 20px 0;
+        padding: 15px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-header {
+        font-size: 18px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .cart-items {
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .list-items {
+        font-size: 14px;
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+        background-color: #F9F9F9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .close-list {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        text-align: center;
+        border-radius: 50%;
+        background-color: #F5F5F5;
+        border: 1px solid #ddd;
+    }
+
+    .close-list:hover {
+        color: red;
+        border: 1px solid red;
+        background-color: #fff;
+    }
+
+    .empty-cart {
+        margin: 20px auto;
+        width: 60%;
+        text-align: center;
+        font-size: 14px;
+        color: #888;
+    }
+
+    .start-order-btn, .confirm-order-btn {
+        font-size: 14px;
+        padding: 10px;
+        width: 90%; 
+        border-radius: 8px;
+        margin: 15px auto; 
+        text-align: center;
+        display: block;
+    }
+
+    .start-order-btn:hover, .confirm-order-btn:hover {
+        background-color: #B34B25;
+        color: white;
+        transition: all 0.3s ease; 
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+        border-radius: 10px;
+    }
+}
 }
